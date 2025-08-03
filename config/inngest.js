@@ -6,30 +6,24 @@ import User from "@/models/User";
 export const inngest = new Inngest({ id: "nextbuy" });
 
 // Inngest Function to save user data to a database
-export const syncUserCreation = inngest.createFunction(
-    { id: "sync-user-frm-clerk" },
-    { event: 'clerk/user.created' },
-    async ({ event, step }) => {
-        try {
-            const { id, first_name, last_name, email_addresses, image_url } = event.data;
-
-            const userData = {
-                _id: id,
-                email: email_addresses?.[0]?.email_address,
-                name: `${first_name} ${last_name}`,
-                imageUrl: image_url,
-            };
-
-            await connectDB();
-            await User.create(userData);
-
-            return { success: true };
-        } catch (error) {
-            console.error("Error in syncUserCreation:", error);
-            return { success: false, error: error.message };
+export const syncUserCreation = inngest.createFunction({
+    id: "sync-user-frm-clerk",
+},
+    {
+        event: 'clerk/user.created'
+    },
+    async ({ event }) => {
+        const { id, first_name, last_name, email_addresses, image_url } = event.data;
+        const userData = {
+            _id: id,
+            email: email_addresses[0].email_address,
+            name: `${first_name} ${last_name}`,
+            imageUrl: image_url,
         }
+        await connectDB();
+        await User.create(userData)
     }
-);
+)
 
 // Inngest Function to update user data in a database
 export const syncUserUpdation = inngest.createFunction({
