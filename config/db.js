@@ -1,4 +1,3 @@
-'use client';
 import mongoose from "mongoose";
 
 let cached = global.mongoose;
@@ -17,14 +16,11 @@ async function connectDB() {
       bufferCommands: false,
     };
 
-    console.log("⏳ Connecting to MongoDB...");
+    // console.log("⏳ Connecting to MongoDB...");
     cached.promise = mongoose.connect(`${process.env.MONGODB_URI}/nextbuy`, opts).then((mongoose) => {
-      console.log("✅ MongoDB connected successfully.");
+      // console.log("✅ MongoDB connected successfully.");
       return mongoose;
-    }).catch((err) => {
-      console.error("❌ MongoDB connection failed:", err.message);
-      throw err;
-    });
+    })
 
     cached.conn = await cached.promise;
     return cached.conn;
