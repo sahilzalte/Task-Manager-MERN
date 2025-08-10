@@ -4,9 +4,9 @@ import { createTask, deleteTask, getAllTask, showTask, updateTask } from "../con
 const TaskRouter = express.Router()
 
 TaskRouter.post('/create-task', createTask)
-TaskRouter.post('/get-all-task', getAllTask)
-TaskRouter.post('/show-task/:taskid', showTask)
-TaskRouter.post('/update-task/:taskid', updateTask)
-TaskRouter.post('/delete-task/:taskid', deleteTask)
+TaskRouter.get('/get-all-task', getAllTask)
+TaskRouter.get('/show-task/:taskid', showTask)
+TaskRouter.put('/update-task/:taskid', updateTask)
+TaskRouter.delete('/delete-task/:taskid', deleteTask)
 
 export default TaskRouter
