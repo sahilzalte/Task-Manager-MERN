@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import z, { ZodError } from "zod";
 import { getZodError } from "../helper/getZodError";
+import { toast } from "react-toastify";
 const HomePage = () => {
 
     const [formData, setFormData] = useState();
@@ -32,15 +33,18 @@ const HomePage = () => {
             })
 
             const responseData = await response.json();
-            console.log(responseData);
+            if (!response.ok) {
+                throw new Error(responseData.message)
+            }
+            setFormData({});
+            toast(responseData.message)
 
         } catch (error) {
             if (error instanceof ZodError) {
                 const getError = getZodError(error.issues)
                 setError(getError);
             }
-            console.log(error);
-
+            toast.error(error.message)
         }
 
     }
@@ -52,7 +56,8 @@ const HomePage = () => {
                     <label className="block mb-2 text-sm font-medium text-gray-900 ">
                         Title
                     </label>
-                    <input onChange={handleInput}
+                    <input value={formData?.title || ""}
+                        onChange={handleInput}
                         name="title"
                         type="text"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -65,7 +70,8 @@ const HomePage = () => {
                     <label className="block mb-2 text-sm font-medium text-gray-900 ">
                         Description
                     </label>
-                    <textarea onChange={handleInput}
+                    <textarea value={formData?.description || ""}
+                        onChange={handleInput}
                         name="description"
                         rows="4"
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
