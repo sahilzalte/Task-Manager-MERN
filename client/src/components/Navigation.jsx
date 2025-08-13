@@ -89,7 +89,7 @@ const Navigation = () => {
                         <div className="relative" ref={contactRef}>
                             <button
                                 onClick={() => setIsContactOpen(!isContactOpen)}
-                                className={`${baseButtonClass} ${inactiveButtonClass} hover:bg-purple-800/50 hover:text-purple-200 ${isContactOpen ? 'bg-purple-800/50 text-purple-200' : ''} w-full md:w-auto`}
+                                className={`cursor-pointer ${baseButtonClass} ${inactiveButtonClass} hover:bg-purple-800/50 hover:text-purple-200 ${isContactOpen ? 'bg-purple-800/50 text-purple-200' : ''} w-full md:w-auto`}
                             >
                                 <FiMail className="w-4 h-4" />
                                 Contact
