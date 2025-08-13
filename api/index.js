@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json())
 app.use(cors({
-    origin: 'https://tasktorch.vercel.app/'
+    origin: 'https://tasktorch.vercel.app'
 }))
 
 // Importing Task routes
