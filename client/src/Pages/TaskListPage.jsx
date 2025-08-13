@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Task from "../components/Task";
 import { FiPlus, FiAlertTriangle, FiList, FiRefreshCw } from "react-icons/fi";
 import { RiTaskLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const statusIcons = {
     Pending: <FiRefreshCw className="text-amber-400" />,
@@ -248,14 +249,16 @@ const TaskListPage = () => {
                                 <p className="text-gray-400 mb-6">
                                     Get started by creating your first task
                                 </p>
-                                <motion.button
-                                    whileHover={{ scale: 1.03 }}
-                                    whileTap={{ scale: 0.97 }}
-                                    className="flex items-center justify-center gap-2 mx-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-medium shadow-lg hover:shadow-purple-500/20 transition-all"
-                                >
-                                    <FiPlus className="h-5 w-5" />
-                                    Create New Task
-                                </motion.button>
+                                <Link to={'/'}>
+                                    <motion.button
+                                        whileHover={{ scale: 1.03 }}
+                                        whileTap={{ scale: 0.97 }}
+                                        className="cursor-pointer flex items-center justify-center gap-2 mx-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-medium shadow-lg hover:shadow-purple-500/20 transition-all"
+                                    >
+                                        <FiPlus className="h-5 w-5" />
+                                        Create New Task
+                                    </motion.button>
+                                </Link>
                             </motion.div>
                         )
                     ) : (
